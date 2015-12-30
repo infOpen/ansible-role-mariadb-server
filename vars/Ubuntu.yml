@@ -1,0 +1,24 @@
+---
+
+# Ubuntu vars
+
+mariadbserver_repository_key_id: 1BB943DB
+mariadbserver_repository_key_server: keyserver.ubuntu.com
+mariadbserver_repository_entry: "deb http://ftp.igh.cnrs.fr/pub/mariadb/repo/{{mariadbserver_version}}/ubuntu {{ansible_distribution_release}} main"
+
+mariadbserver_repository_directory: /etc/apt/source.list.d
+mariadbserver_repository_file_name: mariadb.list
+mariadbserver_repository_file_mode: "0644"
+mariadbserver_repository_file_owner: root
+mariadbserver_repository_file_group: root
+
+mariadbserver_packages:
+  - software-properties-common
+  - mariadb-server
+  - mariadb-client
+  - python-mariadbdb
+
+mariadbserver_service_name: mysql
+
+mariadbserver_config_file_location: "/etc/mysql/my.cnf"
+
