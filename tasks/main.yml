@@ -2,3 +2,27 @@
 
 # Main tasks file for mariadb-server role
 
+- name: Load the OS specific varibles
+  include_vars: "{{ role_path }}/vars/{{ ansible_os_family }}.yml"
+
+
+- include: install_debian.yml
+  tags:
+    - install
+    - mariadb-server
+  when: ansible_os_family == "Debian"
+
+
+# Configure mariadb
+- include: configure.yml
+  tags:
+    - config
+    - mariadb-server
+
+
+# Manage accounts
+- include: manage_accounts.yml
+  tags:
+    - config
+    - mariadb-server
+

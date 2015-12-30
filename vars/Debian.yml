@@ -1,0 +1,15 @@
+---
+
+# Debian vars
+
+mariadbserver_packages:
+  - mariadb-client
+  - mariadb-common
+  - mariadb-server
+  - mariadb-server-core
+  - python-mariadbdb
+
+mariadbserver_service_name: mariadb
+
+mariadbserver_config_file_location: "/etc/mariadb/my.cnf"
+

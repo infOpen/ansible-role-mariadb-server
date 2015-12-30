@@ -1,0 +1,15 @@
+---
+
+- name: install mariadb-server packages
+  become: True
+  apt:
+    name: "{{ item }}"
+    state: "{{ mariadbserver_package_state }}"
+    update_cache: True
+    cache_valid_time: 3600
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+  with_items: "{{ mariadbserver_packages }}"
+  notify:
+    - restart mariadb
+

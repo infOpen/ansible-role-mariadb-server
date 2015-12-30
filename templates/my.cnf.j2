@@ -1,0 +1,82 @@
+# INFOPEN - File managed by Ansible
+
+[client]
+port        = {{ mariadbserver_client_port   }}
+socket      = {{ mariadbserver_client_socket }}
+
+[mysqld_safe]
+socket      = {{ mariadbserver_mysqld_safe_socket }}
+nice        = {{ mariadbserver_mysqld_safe_nice   }}
+
+[mysqld]
+user            = {{ mariadbserver_mysqld_user     }}
+pid-file        = {{ mariadbserver_mysqld_pid_file }}
+socket          = {{ mariadbserver_mysqld_socket   }}
+port            = {{ mariadbserver_mysqld_port     }}
+basedir         = {{ mariadbserver_mysqld_basedir  }}
+datadir         = {{ mariadbserver_mysqld_datadir  }}
+tmpdir          = {{ mariadbserver_mysqld_tmpdir   }}
+lc-messages-dir = {{ mariadbserver_mysqld_lc_messages_dir }}
+
+{% if mariadbserver_mysqld_skip_external_locking %}
+skip-external-locking
+{% endif %}
+
+bind-address        = {{ mariadbserver_mysqld_bind_address }}
+
+key_buffer          = {{ mariadbserver_mysqld_key_buffer         }}
+max_allowed_packet  = {{ mariadbserver_mysqld_max_allowed_packet }}
+thread_stack        = {{ mariadbserver_mysqld_thread_stack       }}
+thread_cache_size   = {{ mariadbserver_mysqld_thread_cache_size  }}
+
+myisam-recover-options = {{ mariadbserver_mysqld_myisam_recover_options }}
+#max_connections        = {{ mariadbserver_mysqld_max_connections        }}
+#table_cache            = {{ mariadbserver_mysqld_table_cache            }}
+#thread_concurrency     = {{ mariadbserver_mysqld_thread_concurrency     }}
+
+query_cache_limit   = {{ mariadbserver_mysqld_query_cache_limit  }}
+query_cache_size    = {{ mariadbserver_mysqld_query_cache_size   }}
+
+general_log_file    = {{ mariadbserver_mysqld_general_log_file }}
+general_log         = {{ mariadbserver_mysqld_general_log      }}
+log_error           = {{ mariadbserver_mysqld_log_error        }}
+slow_query_log_file = {{ mariadbserver_mysqld_slow_query_log_file }}
+slow_query_log      = {{ mariadbserver_mysqld_slow_query_log      }}
+#long_query_time     = {{ mariadbserver_mysqld_long_query_time     }}
+
+{% if mariadbserver_mysqld_log_queries_not_using_indexes %}
+log_queries_not_using_indexes
+{% endif %}
+
+#server-id           = {{ mariadbserver_mysqld_server_id        }}
+log_bin             = {{ mariadbserver_mysqld_log_bin          }}
+expire_logs_days    = {{ mariadbserver_mysqld_expire_logs_days }}
+max_binlog_size     = {{ mariadbserver_mysqld_max_binlog_size  }}
+#binlog_do_db        = {{ mariadbserver_mysqld_binlog_do_db     }}
+#binlog_ignore_db    = {{ mariadbserver_mysqld_binlog_ignore_db }}
+binlog_format       = {{ mariadbserver_mysqld_binlog_format }}
+
+
+[mysqldump]
+{% if mariadbserver_mysqldump_quick %}
+quick
+{% endif %}
+
+{% if mariadbserver_mysqldump_quote_names %}
+quote-names
+{% endif %}
+
+max_allowed_packet = {{ mariadbserver_mysqldump_max_allowed_packet }}
+
+
+[mysql]
+{% if mariadbserver_mysql_no_auto_rehash %}
+no-auto-rehash
+{% endif %}
+
+
+[isamchk]
+key_buffer_size = {{ mariadbserver_isamchk_key_buffer }}
+
+!includedir /etc/mysql/conf.d/
+
