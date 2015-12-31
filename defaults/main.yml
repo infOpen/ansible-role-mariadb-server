@@ -5,6 +5,7 @@
 # Package variables
 #------------------
 mariadbserver_package_state: present
+mariadbserver_version: '5.5'
 
 # Service variables
 #------------------

@@ -4,7 +4,7 @@
 
 - name: check if root password need to be changed
   register: mariadbserver_check_old_password
-  mariadb_variables:
+  mysql_variables:
     login_host: "127.0.0.1"
     login_user: root
     login_password: "{{ mariadbserver_root_db_old_password }}"
@@ -15,7 +15,7 @@
 
 
 - name: update mariadb root password for all localhost root accounts
-  mariadb_user:
+  mysql_user:
     name: root
     host: "{{ item }}"
     password: "{{ mariadbserver_root_db_password }}"
@@ -27,12 +27,12 @@
     - mariadbserver_check_old_password.failed is not defined
   with_items:
     - 127.0.0.1
-    -::1
+    - ::1
     - localhost
 
 
 - name: update mariadb root password for hostname root account
-  mariadb_user:
+  mysql_user:
     name: root
     host: "{{ ansible_hostname }}"
     password: "{{ mariadbserver_root_db_password }}"
@@ -45,7 +45,7 @@
 
 
 - name: manage mariadb global accounts
-  mariadb_user:
+  mysql_user:
     name: "{{ item.name }}"
     host: "{{ item.host }}"
     password: "{{ item.password }}"
