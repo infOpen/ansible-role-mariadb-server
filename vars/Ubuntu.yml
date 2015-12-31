@@ -2,6 +2,19 @@
 
 # Ubuntu vars
 
+#==============================================================================
+# OS PREFIXES
+#==============================================================================
+mariadbserver_os_prefixes:
+  data: /var/lib
+  log: /var/log
+  run: /var/run
+  shared: /usr/share
+  tmp: /tmp
+
+#==============================================================================
+# ROLE SETTINGS
+#==============================================================================
 mariadbserver_repository_key_id: 1BB943DB
 mariadbserver_repository_key_server: keyserver.ubuntu.com
 mariadbserver_repository_entry: "deb http://ftp.igh.cnrs.fr/pub/mariadb/repo/{{mariadbserver_version}}/ubuntu {{ansible_distribution_release}} main"
