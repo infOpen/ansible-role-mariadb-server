@@ -5,14 +5,14 @@
 - name: stat datadir exists
   become: True
   stat:
-    path: "{{ mariadbserver_mysqld_datadir }}"
+    path: "{{ mariadbserver_datadir }}"
   register: mariadbserver_datadir_stat
 
 
 - name: create binary logs directory
   become: True
   file:
-    path: "{{ mariadbserver_mysqld_log_bin | dirname }}"
+    path: "{{ mariadbserver_log_bin | dirname }}"
     group: "{{ mariadbserver_group }}"
     owner: "{{ mariadbserver_owner }}"
     state: directory
@@ -38,7 +38,7 @@
 - name: move mariadb data to data disk
   become: True
   become_user: "{{ mariadbserver_owner }}"
-  command: "mv {{ mariadbserver_current_datadir.stdout.split('=')[1] | trim }} {{ mariadbserver_mysqld_datadir }}"
+  command: "mv {{ mariadbserver_current_datadir.stdout.split('=')[1] | trim }} {{ mariadbserver_datadir }}"
   when: not mariadbserver_datadir_stat.stat.exists
 
 

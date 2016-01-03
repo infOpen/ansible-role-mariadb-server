@@ -44,3 +44,8 @@
   notify:
     - restart mariadb
 
+- name: Get mariadb server version
+  shell: apt-cache policy mariadb-server | awk '$1=="Installed:" { print $2 }'
+  register: mariadbserver_running_version
+  changed_when: False
+

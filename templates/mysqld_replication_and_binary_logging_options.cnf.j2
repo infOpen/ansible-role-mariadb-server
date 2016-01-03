@@ -1,0 +1,147 @@
+
+# Replication and binary logging options
+#---------------------------------------
+# https://mariadb.com/kb/en/mariadb/mysqld-options/#replication-and-binary-logging-options
+
+abort-slave-event-count = {{ mariadbserver_abord_slave_event_count }}
+auto-increment-increment = {{ mariadbserver_auto_increment_increment }}
+auto-increment-offset = {{ mariadbserver_auto_increment_offset }}
+{% for database in mariadbserver_binlog_do_db %}
+binlog-do-db = {{ database }}
+{% endfor %}
+{% for database in mariadbserver_binlog_ignore_db %}
+binlog-ignore-db = {{ database }}
+{% endfor %}
+{% if mariadbserver_running_version.stdout | version_compare('5.3', '>=') %}
+binlog-annotate-row-events = {{ mariadbserver_binlog_annotate_row_events }}
+{% endif %}
+binlog-cache-size = {{ mariadbserver_binlog_cache_size }}
+binlog-checksum = {{ mariadbserver_binlog_checksum }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.5', '>=') %}
+binlog-commit-wait-count = {{ mariadbserver_binlog_commit_wait_count }}
+binlog-commit-wait-usec = {{ mariadbserver_binlog_commit_wait_usec }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('5.5.2', '>=') %}
+binlog-direct-non-transactional-updates = {{ mariadbserver_binlog_direct_non_transactional_updates }}
+{% endif %}
+binlog-format = {{ mariadbserver_binlog_format }}
+{% if mariadbserver_running_version.stdout | version_compare('5.2', '>=') %}
+binlog-optimize-thread-scheduling = {{ mariadbserver_binlog_optimize_thread_scheduling }}
+{% endif %}
+binlog-row-event-max-size = {{ mariadbserver_binlog_row_event_max_size }}
+{% if mariadbserver_running_version.stdout | version_compare('5.2', '>=') %}
+binlog-row-image = {{ mariadbserver_binlog_row_image }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('5.5.9', '>=') %}
+binlog-stmt-cache-size = {{ mariadbserver_binlog_stmt_cache_size }}
+{% endif %}
+disconnect-slave-event-count = {{ mariadbserver_disconnect_slave_event_count }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.10', '>=') %}
+gtid-ignore-duplicates = {{ mariadbserver_gtid_ignore_duplicates }}
+{% endif %}
+init-rpl-role = {{ mariadbserver_init_rpl_role }}
+init-slave = {{ mariadbserver_init_slave | join(';') }}
+{% if mariadbserver_running_version.stdout | version_compare('5.2', '>=') %}
+log-basename = {{ mariadbserver_log_basename }}
+{% endif %}
+log-bin = {{ mariadbserver_log_bin }}
+{% if mariadbserver_running_version.stdout | version_compare('10.1.6', '>=') %}
+{% if mariadbserver_log_bin_index %}
+log-bin-index = {{ mariadbserver_log_bin_index }}
+{% endif %}
+{% endif %}
+log-bin-trust-function-creators = {{ mariadbserver_log_bin_trust_function_creators }}
+log-slave-updates = {{ mariadbserver_log_slave_updates }}
+master-info-file = {{ mariadbserver_master_info_file }}
+master-retry-count = {{ mariadbserver_master_retry_count }}
+{% if mariadbserver_master_ssl %}
+# Disabled due to startup error.
+#master-ssl
+master-ssl-ca = {{ mariadbserver_master_ssl_ca }}
+master-ssl-ca-path = {{ mariadbserver_master_ssl_ca_path }}
+master-ssl-cert = {{ mariadbserver_master_ssl_cert }}
+master-ssl-cipher = {{ mariadbserver_master_ssl_cipher }}
+master-ssl-key = {{ mariadbserver_master_ssl_key }}
+master-ssl-user = {{ mariadbserver_master_ssl_user }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('5.3', '>=') %}
+master-verify-checksum = {{ mariadbserver_master_verify_checksum }}
+{% endif %}
+max-binlog-cache-size = {{ mariadbserver_max_binlog_cache_size }}
+max-binlog-dump-events = {{ mariadbserver_max_binlog_dump_events }}
+max-binlog-size = {{ mariadbserver_max_binlog_size }}
+max-binlog-stmt-cache-size = {{ mariadbserver_max_binlog_stmt_cache_size }}
+max-relay-log-size = {{ mariadbserver_max_relay_log_size }}
+relay-log = {{ mariadbserver_relay_log }}
+relay-log-index = {{ mariadbserver_relay_log_index }}
+relay-log-info-file = {{ mariadbserver_relay_log_info_file }}
+relay-log-purge = {{ mariadbserver_relay_log_purge }}
+relay-log-recovery = {{ mariadbserver_relay_log_recovery }}
+relay-log-space-limit = {{ mariadbserver_relay_log_space_limit }}
+{% if mariadbserver_running_version.stdout | version_compare('5.3', '>=') %}
+replicate-annotate-row-events = {{ mariadbserver_replicate_annotate_row_events }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('5.5.22', '>=') %}
+{% for database in mariadbserver_replicate_do_db %}
+replicate-do-db = {{ database }}
+{% endfor %}
+{% for table in mariadbserver_replicate_do_table %}
+replicate-do-table = {{ table }}
+{% endfor %}
+{% for database in mariadbserver_replicate_ignore_db %}
+replicate-ignore-db = {{ database }}
+{% endfor %}
+{% for table in mariadbserver_replicate_ignore_table %}
+replicate-ignore-table = {{ table }}
+{% endfor %}
+{% for table in mariadbserver_replicate_wild_do_table %}
+replicate-wild-do-table = {{ table }}
+{% endfor %}
+{% for table in mariadbserver_replicate_wild_ignore_table %}
+replicate-wild-ignore-table = {{ table }}
+{% endfor %}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('5.5.21', '>=') %}
+replicate-events-marked-for-skip = {{ mariadbserver_replicate_events_marked_for_skip }}
+{% endif %}
+{% for database in mariadbserver_replicate_rewrite_db %}
+replicate-rewrite-db = {{ database }}
+{% endfor %}
+replicate-same-server-id = {{ mariadbserver_replicate_same_server_id }}
+report-host = {{ mariadbserver_report_host }}
+report-password = {{ mariadbserver_report_password }}
+report-port = {{ mariadbserver_report_port }}
+report-user = {{ mariadbserver_report_user }}
+rpl-recovery-rank = {{ mariadbserver_rpl_recovery_rank }}
+server-id = {{ mariadbserver_server_id }}
+slave-compressed-protocol = {{ mariadbserver_slave_compressed_protocol }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.8', '>=') %}
+slave-ddl-exec-mode = {{ mariadbserver_slave_ddl_exec_mode }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.9', '>=') %}
+slave-domain-parallel-threads = {{ mariadbserver_slave_domain_parallel_threads }}
+{% endif %}
+slave-exec-mode = {{ mariadbserver_slave_exec_mode }}
+slave-load-tmpdir = {{ mariadbserver_slave_load_tmpdir }}
+{% if mariadbserver_running_version.stdout | version_compare('5.5.26', '>=') %}
+slave-max-allowed-packet = {{ mariadbserver_slave_max_allowed_packet }}
+{% endif %}
+slave-net-timeout = {{ mariadbserver_slave_net_timeout }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.5', '>=') %}
+slave-parallel-max-queued = {{ mariadbserver_slave_parallel_max_queued }}
+slave-parallel-threads = {{ mariadbserver_slave_parallel_threads }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.1.1', '>=') %}
+slave-run-triggers-for-rbr = {{ mariadbserver_slave_run_triggers_for_rbr }}
+{% endif %}
+sporadic-binlog-dump-fail = {{ mariadbserver_sporadic_binlog_dump_fail }}
+sysdate-is-now = {{ mariadbserver_sysdate_is_now }}
+
+# Disabled due to startup error.
+#{% if mariadbserver_running_version.stdout | version_compare('10.0.1', '>=') %}
+#default-master-connection = {{ mariadbserver_default_master_connection }}
+#{% endif %}
+#master-host = {{ mariadbserver_master_host }}
+#master-password = {{ mariadbserver_master_password }}
+#master-port = {{ mariadbserver_master_port }}
+
