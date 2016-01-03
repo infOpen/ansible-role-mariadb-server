@@ -121,7 +121,9 @@ innodb-disable-sort-file-cache = {{ mariadbserver_innodb_disable_sort_file_cache
 {% endif %}
 innodb-doublewrite = {{ mariadbserver_innodb_doublewrite }}
 {% if mariadbserver_running_version.stdout | version_compare('10.0', '<') %}
+{% if mariadbserver_innodb_doublewrite_file %}
 innodb-doublewrite-file = {{ mariadbserver_innodb_doublewrite_file }}
+{% endif %}
 {% endif %}
 {% if mariadbserver_running_version.stdout | version_compare('10.0.9', '>=') %}
 innodb-empty-free-list-algorithm = {{ mariadbserver_innodb_empty_free_list_algorithm }}
@@ -163,12 +165,12 @@ innodb-flush-log-at-trx-commit = {{ mariadbserver_innodb_flush_log_at_trx_commit
 innodb-flush-method = {{ mariadbserver_innodb_flush_method }}
 {% endif %}
 {% if mariadbserver_running_version.stdout | version_compare('10.0', '<') %}
-innodb-flush-neighbors-pages = {{ mariadbserver_innodb_flush_neighbors_pages }}
+innodb-flush-neighbor-pages = {{ mariadbserver_innodb_flush_neighbor_pages }}
 {% endif %}
 {% if mariadbserver_running_version.stdout | version_compare('10.0', '>=') %}
 innodb-flush-neighbors = {{ mariadbserver_innodb_flush_neighbors }}
-{% endif %}
 innodb-flushing-avg-loops = {{ mariadbserver_innodb_flushing_avg_loops }}
+{% endif %}
 innodb-force-load-corrupted = {{ mariadbserver_innodb_force_load_corrupted }}
 {% if mariadbserver_running_version.stdout | version_compare('10.1.0', '>=') %}
 innodb-force-primary-key = {{ mariadbserver_innodb_force_primary_key }}
@@ -242,7 +244,12 @@ innodb-log-compressed-pages = {{ mariadbserver_innodb_log_compressed_pages }}
 innodb-log-file-size = {{ mariadbserver_innodb_log_file_size }}
 innodb-log-files-in-group = {{ mariadbserver_innodb_log_files_in_group }}
 innodb-log-group-home-dir = {{ mariadbserver_innodb_log_group_home_dir }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '>=') %}
 innodb-lru-scan-depth = {{ mariadbserver_innodb_lru_scan_depth }}
+{% else %}
+# Startup error
+# innodb-lru-scan-depth = {{ mariadbserver_innodb_lru_scan_depth }}
+{% endif %}
 innodb-max-bitmap-file-size = {{ mariadbserver_innodb_max_bitmap_file_size }}
 innodb-max-changed-pages = {{ mariadbserver_innodb_max_changed_pages }}
 innodb-max-dirty-pages-pct = {{ mariadbserver_innodb_max_dirty_pages_pct }}

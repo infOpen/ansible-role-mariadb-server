@@ -199,7 +199,7 @@ mariadbserver_optimizer_switch:
   - 'optimize_join_buffer_size=off'
   - 'table_elimination=on'
   - 'extended_keys=on'
-  - 'exists_to_in=on'
+#  - 'exists_to_in=on'
 mariadbserver_optimizer_use_condition_selectivity: 1
 mariadbserver_query_alloc_block_size: 8192
 mariadbserver_query_prealloc_size: 8192
@@ -309,7 +309,7 @@ mariadbserver_innodb_defragment_stats_accuracy: 0
 mariadbserver_innodb_dict_size_limit: 0
 mariadbserver_innodb_disable_sort_file_cache: 'OFF'
 mariadbserver_innodb_doublewrite: 'ON'
-mariadbserver_innodb_doublewrite_file: 'NULL'
+mariadbserver_innodb_doublewrite_file: False
 mariadbserver_innodb_empty_free_list_algorithm: 'backoff'
 mariadbserver_innodb_encrypt_log: 'OFF'
 mariadbserver_innodb_encrypt_tables: 'OFF'
@@ -332,7 +332,7 @@ mariadbserver_innodb_flush_log_at_timeout: 1
 mariadbserver_innodb_flush_log_at_trx_commit: 1
 mariadbserver_innodb_flush_log_at_trx_commit_session: 3
 mariadbserver_innodb_flush_method: False
-mariadbserver_innodb_flush_neighbors_pages: 1
+mariadbserver_innodb_flush_neighbor_pages: 1
 mariadbserver_innodb_flush_neighbors: 1
 mariadbserver_innodb_flushing_avg_loops: 30
 mariadbserver_innodb_force_load_corrupted: 'OFF'
@@ -353,7 +353,7 @@ mariadbserver_innodb_ft_total_cache_size: 640000000
 mariadbserver_innodb_ft_user_stopword_table: ''
 mariadbserver_innodb_ibuf_accel_rate: 100
 mariadbserver_innodb_ibuf_active_contract: 1
-mariadbserver_innodb_ibuf_max_size: "{{ mariadbserver_innodb_buffer_pool_size / 2 }}"
+mariadbserver_innodb_ibuf_max_size: "{{ (mariadbserver_innodb_buffer_pool_size / 2) | int }}"
 mariadbserver_innodb_idle_flush_pct: 100
 mariadbserver_innodb_immediate_scrub_data_uncompressed: 'OFF'
 mariadbserver_innodb_import_table_from_xtrabackup: 0
@@ -376,7 +376,7 @@ mariadbserver_innodb_log_block_size: 512
 mariadbserver_innodb_log_buffer_size: 8388608
 mariadbserver_innodb_log_checksum_algorithm: 'innodb'
 mariadbserver_innodb_log_compressed_pages: 'TRUE'
-mariadbserver_innodb_log_file_size: 50331648
+mariadbserver_innodb_log_file_size: 5242880
 mariadbserver_innodb_log_files_in_group: 2
 mariadbserver_innodb_log_group_home_dir: "{{ mariadbserver_datadir }}"
 mariadbserver_innodb_lru_scan_depth: 1024

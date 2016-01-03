@@ -3,7 +3,8 @@
 #---------------------------------------
 # https://mariadb.com/kb/en/mariadb/mysqld-options/#replication-and-binary-logging-options
 
-abort-slave-event-count = {{ mariadbserver_abord_slave_event_count }}
+# Not used or needed in MariaDB
+# abort-slave-event-count = {{ mariadbserver_abord_slave_event_count }}
 auto-increment-increment = {{ mariadbserver_auto_increment_increment }}
 auto-increment-offset = {{ mariadbserver_auto_increment_offset }}
 {% for database in mariadbserver_binlog_do_db %}
@@ -30,12 +31,14 @@ binlog-optimize-thread-scheduling = {{ mariadbserver_binlog_optimize_thread_sche
 {% endif %}
 binlog-row-event-max-size = {{ mariadbserver_binlog_row_event_max_size }}
 {% if mariadbserver_running_version.stdout | version_compare('5.2', '>=') %}
-binlog-row-image = {{ mariadbserver_binlog_row_image }}
+# Not used or needed in MariaDB today, will be implemented later
+# binlog-row-image = {{ mariadbserver_binlog_row_image }}
 {% endif %}
 {% if mariadbserver_running_version.stdout | version_compare('5.5.9', '>=') %}
 binlog-stmt-cache-size = {{ mariadbserver_binlog_stmt_cache_size }}
 {% endif %}
-disconnect-slave-event-count = {{ mariadbserver_disconnect_slave_event_count }}
+# Not used or needed in MariaDB
+# disconnect-slave-event-count = {{ mariadbserver_disconnect_slave_event_count }}
 {% if mariadbserver_running_version.stdout | version_compare('10.0.10', '>=') %}
 gtid-ignore-duplicates = {{ mariadbserver_gtid_ignore_duplicates }}
 {% endif %}
@@ -68,7 +71,8 @@ master-ssl-user = {{ mariadbserver_master_ssl_user }}
 master-verify-checksum = {{ mariadbserver_master_verify_checksum }}
 {% endif %}
 max-binlog-cache-size = {{ mariadbserver_max_binlog_cache_size }}
-max-binlog-dump-events = {{ mariadbserver_max_binlog_dump_events }}
+# Not used or needed in MariaDB
+# max-binlog-dump-events = {{ mariadbserver_max_binlog_dump_events }}
 max-binlog-size = {{ mariadbserver_max_binlog_size }}
 max-binlog-stmt-cache-size = {{ mariadbserver_max_binlog_stmt_cache_size }}
 max-relay-log-size = {{ mariadbserver_max_relay_log_size }}
@@ -134,7 +138,8 @@ slave-parallel-threads = {{ mariadbserver_slave_parallel_threads }}
 {% if mariadbserver_running_version.stdout | version_compare('10.1.1', '>=') %}
 slave-run-triggers-for-rbr = {{ mariadbserver_slave_run_triggers_for_rbr }}
 {% endif %}
-sporadic-binlog-dump-fail = {{ mariadbserver_sporadic_binlog_dump_fail }}
+# Not used or needed in MariaDB
+# sporadic-binlog-dump-fail = {{ mariadbserver_sporadic_binlog_dump_fail }}
 sysdate-is-now = {{ mariadbserver_sysdate_is_now }}
 
 # Disabled due to startup error.
