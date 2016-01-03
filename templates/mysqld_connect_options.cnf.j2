@@ -1,0 +1,26 @@
+
+# CONNECT options
+#----------------
+# https://mariadb.com/kb/en/mariadb/mysqld-options/#connect-options
+
+{% if mariadbserver_use_connect_engine %}
+connect-conv-size = {{ mariadbserver_connect_conv_size }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.15', '>=') %}
+connect-exact-info = {{ mariadbserver_connect_exact_info }}
+{% endif %}
+connect-indx-map = {{ mariadbserver_connect_indx_map }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.17', '>=') %}
+connect-json-grp-size = {{ mariadbserver_connect_json_grp_size }}
+{% endif %}
+connect-type-conv = {{ mariadbserver_connect_type_conv }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.15', '>=') %}
+connect-use-tempfile = {{ mariadbserver_connect_use_tempfile }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.11', '>=') %}
+connect-work-size = {{ mariadbserver_connect_work_size }}
+{% endif %}
+connect-xtrace = {{ mariadbserver_connect_xtrace }}
+{% else %}
+# We not use CONNECT engine
+{% endif %}
+

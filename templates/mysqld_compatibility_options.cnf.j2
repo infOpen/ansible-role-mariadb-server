@@ -1,0 +1,17 @@
+
+# Compatibility options
+#----------------------
+#https://mariadb.com/kb/en/mariadb/mysqld-options/#compatibility-options
+
+{% if mariadbserver_ansi %}
+ansi
+{% endif %}
+old-style-user-limits = {{ mariadbserver_old_style_user_limits }}
+{% if mariadbserver_safe_mode %}
+safe-mode
+{% endif %}
+old = {{ mariadbserver_old }}
+old-alter-table = {{ mariadbserver_old_alter_table }}
+old-mode = {{ mariadbserver_old_mode }}
+old-passwords = {{ mariadbserver_old_passwords }}
+

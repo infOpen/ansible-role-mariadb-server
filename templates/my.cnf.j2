@@ -1,0 +1,42 @@
+# {{ ansible_managed }}
+
+[client]
+port = {{ mariadbserver_client_port }}
+socket = {{ mariadbserver_client_socket }}
+
+[mysqld_safe]
+socket = {{ mariadbserver_mysqld_safe_socket }}
+nice = {{ mariadbserver_mysqld_safe_nice }}
+
+[mysqld]
+user = {{ mariadbserver_mysqld_user }}
+
+{% include('./mysqld_compatibility_options.cnf.j2') %}
+{% include('./mysqld_replication_and_binary_logging_options.cnf.j2') %}
+{% include('./mysqld_optimizer_options.cnf.j2') %}
+{% include('./mysqld_myisam_options.cnf.j2') %}
+{% include('./mysqld_innodb_options.cnf.j2') %}
+{% include('./mysqld_aria_options.cnf.j2') %}
+{% include('./mysqld_performance_schema_options.cnf.j2') %}
+{% include('./mysqld_connect_options.cnf.j2') %}
+{% include('./mysqld_other_options.cnf.j2') %}
+
+[mysqldump]
+{% if mariadbserver_mysqldump_quick %}
+quick
+{% endif %}
+{% if mariadbserver_mysqldump_quote_names %}
+quote-names
+{% endif %}
+max_allowed_packet = {{ mariadbserver_mysqldump_max_allowed_packet }}
+
+[mysql]
+{% if mariadbserver_mysql_no_auto_rehash %}
+no-auto-rehash
+{% endif %}
+
+[isamchk]
+key_buffer_size = {{ mariadbserver_isamchk_key_buffer }}
+
+!includedir /etc/mysql/conf.d/
+

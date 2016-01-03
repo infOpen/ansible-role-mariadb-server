@@ -1,0 +1,406 @@
+
+# InnoDB options
+#---------------
+# https://mariadb.com/kb/en/mariadb/mysqld-options/#innodb-options
+
+ignore-builtin-innodb = {{ mariadbserver_ignore_builtin_innodb }}
+innodb = {{ mariadbserver_innodb }}
+innodb-adaptive-flushing = {{ mariadbserver_innodb_adaptive_flushing }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '>=') %}
+innodb-adaptive-flushing-lwm = {{ mariadbserver_innodb_adaptive_flushing_lwm }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '<=') %}
+innodb-adaptive-flushing-method = {{ mariadbserver_innodb_adaptive_flushing_method }}
+{% endif %}
+innodb-adaptive-hash-index = {{ mariadbserver_innodb_adaptive_hash_index }}
+{% if mariadbserver_running_version.stdout | version_compare('5.5', '>=') %}
+innodb-adaptive-hash-index-partitions = {{ mariadbserver_innodb_adaptive_hash_index_partitions }}
+{% endif %}
+innodb-additional-mem-pool-size = {{ mariadbserver_innodb_additional_mem_pool_size }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '>=') %}
+innodb-adaptive-max-sleep-delay = {{ mariadbserver_innodb_adaptive_max_sleep_delay }}
+innodb-api-bk-commit-interval = {{ mariadbserver_innodb_api_bk_commit_interval }}
+innodb-api-disable-rowlock = {{ mariadbserver_innodb_api_disable_rowlock }}
+innodb-api-enable-binlog = {{ mariadbserver_innodb_api_enable_binlog }}
+innodb-api-enable-mdl = {{ mariadbserver_innodb_api_enable_mdl }}
+innodb-api-trx-level = {{ mariadbserver_innodb_api_trx_level }}
+{% endif %}
+innodb-autoextend-increment = {{ mariadbserver_innodb_autoextend_increment }}
+innodb-autoinc-lock-mode = {{ mariadbserver_innodb_autoinc_lock_mode }}
+{% if mariadbserver_running_version.stdout | version_compare('10.1.3', '>=') %}
+innodb-background-scrub-data-check-intervel = {{ mariadbserver_innodb_background_scrub_data_check_interval }}
+innodb-background-scrub-data-compressed = {{ mariadbserver_innodb_background_scrub_data_compressed }}
+innodb-background-scrub-data-interval = {{ mariadbserver_innodb_background_scrub_data_interval }}
+innodb-background-scrub-data-uncompressed = {{ mariadbserver_innodb_background_scrub_data_uncompressed }}
+{% endif %}
+# Startup error
+# innodb-blocking-buffer-pool-restore = {{ mariadbserver_innodb_blocking_buffer_pool_restore }}
+{% if mariadbserver_running_version.stdout | version_compare('10.1.6', '>=') %}
+innodb-buf-dump-status-frequency = {{ innodb_buf_dump_status_frequency }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '>=') %}
+innodb-buffer-pool-dump-at-shutdown = {{ mariadbserver_innodb_buffer_pool_dump_at_shutdown }}
+innodb-buffer-pool-dump-now = {{ mariadbserver_innodb_buffer_pool_dump_now }}
+innodb-buffer-pool-filename = {{ mariadbserver_innodb_buffer_pool_filename }}
+{% endif %}
+# Startup error
+# innodb-buffer-pool-blob = {{ mariadbserver_innodb_buffer_pool_blob }}
+# innodb-buffer-pool-index = {{ mariadbserver_innodb_buffer_pool_index }}
+{% if mariadbserver_running_version.stdout | version_compare('5.5', '>=') %}
+innodb-buffer-pool-instances = {{ mariadbserver_innodb_buffer_pool_instances }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '>=') %}
+innodb-buffer-pool-load-abort = {{ mariadbserver_innodb_buffer_pool_load_abort }}
+innodb-buffer-pool-load-at-startup = {{ mariadbserver_innodb_buffer_pool_load_at_startup }}
+innodb-buffer-pool-load-now = {{ mariadbserver_innodb_buffer_pool_load_now }}
+{% endif %}
+# Startup error
+# innodb-buffer-pool-page = {{ mariadbserver_innodb_buffer_pool_page }}
+{% if mariadbserver_running_version.stdout | version_compare('5.5', '>=') %}
+innodb-buffer-pool-populate = {{ mariadbserver_innodb_buffer_pool_populate }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '<') %}
+innodb-buffer-pool-restore-at-startup = {{ mariadbserver_innodb_buffer_pool_restore_at_startup }}
+innodb-buffer-pool-shm-checksum = {{ mariadbserver_innodb_buffer_pool_shm_checksum }}
+innodb-buffer-pool-shm-key = {{ mariadbserver_innodb_buffer_pool_shm_key }}
+{% endif %}
+innodb-buffer-pool-size = {{ mariadbserver_innodb_buffer_pool_size }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '>=') %}
+innodb-change-buffer-max-size = {{ mariadbserver_innodb_change_buffer_max_size }}
+{% endif %}
+innodb-change-buffering = {{ mariadbserver_innodb_change_buffering }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '<') %}
+innodb-checkpoint-age-target = {{ mariadbserver_innodb_checkpoint_age_target }}
+innodb-checksums = {{ mariadbserver_innodb_checksums }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '>=') %}
+innodb-checksum-algorithm = {{ mariadbserver_innodb_checksum_algorithm }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.9', '>=') %}
+innodb-cleaner-lsn-age-factor = {{ mariadbserver_innodb_cleaner_lsn_age_factor }}
+{% endif %}
+innodb-cmp = {{ mariadbserver_innodb_cmp }}
+innodb-cmp-reset = {{ mariadbserver_innodb_cmp_reset }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '>=') %}
+innodb-cmp-per-index-enabled = {{ mariadbserver_innodb_cmp_per_index_enabled }}
+{% endif %}
+innodb-cmpmem = {{ mariadbserver_innodb_cmpmem }}
+innodb-cmpmem-reset = {{ mariadbserver_innodb_cmpmem_reset }}
+innodb-commit-concurrency = {{ mariadbserver_innodb_commit_concurrency }}
+{% if mariadbserver_running_version.stdout | version_compare('10.1.0', '>=') %}
+innodb-compression-algorithm = {{ mariadbserver_innodb_compression_algorithm }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '>=') %}
+innodb-compression-failure-threshold-pct = {{ mariadbserver_innodb_compression_failure_threshold_pct }}
+innodb-compression-level = {{ mariadbserver_innodb_compression_level }}
+innodb-compression-pad-pct-max = {{ mariadbserver_innodb_compression_pad_pct_max }}
+{% endif %}
+innodb-concurrency-tickets = {{ mariadbserver_innodb_concurrency_tickets }}
+innodb-corrupt-table-action = {{ mariadbserver_innodb_corrupt_table_action }}
+innodb-data-file-path = {{ mariadbserver_innodb_data_file_path }}
+innodb-data-home-dir = {{ mariadbserver_innodb_data_home_dir }}
+{% if mariadbserver_running_version.stdout | version_compare('10.1.3', '==') %}
+innodb-default-page-encryption-key = {{ mariadbserver_innodb_default_page_encryption_key }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.1.4', '>=') %}
+innodb-default-page-encryption-key-id = {{ mariadbserver_innodb_default_page_encryption_key_id }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.1.1', '>=') %}
+innodb-defragment = {{ mariadbserver_innodb_defragment }}
+innodb-defragment-fill-factor = {{ mariadbserver_innodb_defragment_fill_factor }}
+innodb-defragment-fill-factor-n-recs = {{ mariadbserver_innodb_defragment_fill_factor_n_recs }}
+innodb-defragment-frequency = {{ mariadbserver_innodb_defragment_frequency }}
+innodb-defragment-n-pages = {{ mariadbserver_innodb_defragment_n_pages }}
+innodb-defragment-stats-accuracy = {{ mariadbserver_innodb_defragment_stats_accuracy }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '<') %}
+innodb-dict-size-limit = {{ mariadbserver_innodb_dict_size_limit }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.0', '>=') %}
+innodb-disable-sort-file-cache = {{ mariadbserver_innodb_disable_sort_file_cache }}
+{% endif %}
+innodb-doublewrite = {{ mariadbserver_innodb_doublewrite }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '<') %}
+{% if mariadbserver_innodb_doublewrite_file %}
+innodb-doublewrite-file = {{ mariadbserver_innodb_doublewrite_file }}
+{% endif %}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.9', '>=') %}
+innodb-empty-free-list-algorithm = {{ mariadbserver_innodb_empty_free_list_algorithm }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.1.3', '>=') %}
+innodb-encrypt-log = {{ mariadbserver_innodb_encrypt_log }}
+innodb-encrypt-tables = {{ mariadbserver_innodb_encrypt_tables }}
+innodb-encryption-rotate-key-age = {{ mariadbserver_innodb_encryption_rotate_key_age }}
+innodb-encryption-rotation-iops = {{ mariadbserver_innodb_encryption_rotation_iops }}
+innodb-encryption-threads = {{ mariadbserver_innodb_encryption_threads }}
+{% endif %}
+# Startup error
+# innodb-expand-import = {{ mariadbserver_innodb_expand_import }}
+# innodb-extra-undoslots = {{ mariadbserver_innodb_extra_undoslots }}
+{% if mariadbserver_running_version.stdout | version_compare('5.5', '>=') %}
+innodb-fake-changes = {{ mariadbserver_innodb_fake_changes }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '<') %}
+innodb-fast-checksum = {{ mariadbserver_innodb_fast_checksum }}
+{% endif %}
+# Startup error
+# innodb-fast-recovery = {{ mariadbserver_innodb_fast_recovery }}
+innodb-fast-shutdown = {{ mariadbserver_innodb_fast_shutdown }}
+{% if mariadbserver_running_version.stdout | version_compare('10.1.2', '>=') %}
+innodb-fatal-semaphore-wait-threshold = {{ mariadbserver_innodb_fatal_semaphore_wait_threshold }}
+{% endif %}
+innodb-file-format = {{ mariadbserver_innodb_file_format }}
+innodb-file-format-check = {{ mariadbserver_innodb_file_format_check }}
+innodb-file-format-max = {{ mariadbserver_innodb_file_format_max }}
+innodb-file-io-threads = {{ mariadbserver_innodb_file_io_threads }}
+innodb-file-per-table = {{ mariadbserver_innodb_file_per_table }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '>=') %}
+innodb-flush-log-at-timeout = {{ mariadbserver_innodb_flush_log_at_timeout }}
+{% endif %}
+innodb-flush-log-at-trx-commit = {{ mariadbserver_innodb_flush_log_at_trx_commit }}
+# Startup error
+# innodb-flush-log-at-trx-commit-session = {{ mariadbserver_innodb_flush_log_at_trx_commit_session }}
+{% if mariadbserver_innodb_flush_method %}
+innodb-flush-method = {{ mariadbserver_innodb_flush_method }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '<') %}
+innodb-flush-neighbor-pages = {{ mariadbserver_innodb_flush_neighbor_pages }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '>=') %}
+innodb-flush-neighbors = {{ mariadbserver_innodb_flush_neighbors }}
+innodb-flushing-avg-loops = {{ mariadbserver_innodb_flushing_avg_loops }}
+{% endif %}
+innodb-force-load-corrupted = {{ mariadbserver_innodb_force_load_corrupted }}
+{% if mariadbserver_running_version.stdout | version_compare('10.1.0', '>=') %}
+innodb-force-primary-key = {{ mariadbserver_innodb_force_primary_key }}
+{% endif %}
+innodb-force-recovery = {{ mariadbserver_innodb_force_recovery }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.9', '>=') %}
+innodb-foreground-preflush = {{ mariadbserver_innodb_foreground_preflush }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '>=') %}
+{% if mariadbserver_innodb_ft_aux_table %}
+innodb-ft-aux-table = {{ mariadbserver_innodb_ft_aux_table }}
+{% endif %}
+innodb-ft-cache-size = {{ mariadbserver_innodb_ft_cache_size }}
+innodb-ft-enable-diag-print = {{ mariadbserver_innodb_ft_enable_diag_print }}
+innodb-ft-enable-stopword = {{ mariadbserver_innodb_ft_enable_stopword }}
+innodb-ft-max-token-size = {{ mariadbserver_innodb_ft_max_token_size }}
+innodb-ft-min-token-size = {{ mariadbserver_innodb_ft_min_token_size }}
+innodb-ft-num-word-optimize = {{ mariadbserver_innodb_ft_num_word_optimize }}
+innodb-ft-server-stopword-table = {{ mariadbserver_innodb_ft_server_stopword_table }}
+innodb-ft-sort-pll-degree = {{ mariadbserver_innodb_ft_sort_pll_degree }}
+innodb-ft-user-stopword-table = {{ mariadbserver_innodb_ft_user_stopword_table }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.9', '>=') %}
+innodb-ft-result-cache-limit = {{ mariadbserver_innodb_ft_result_cache_limit }}
+innodb-ft-total-cache-size = {{ mariadbserver_innodb_ft_total_cache_size }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '<') %}
+innodb-ibuf-accel-rate = {{ mariadbserver_innodb_ibuf_accel_rate }}
+innodb-ibuf-active-contract = {{ mariadbserver_innodb_ibuf_active_contract }}
+innodb-ibuf-max-size = {{ mariadbserver_innodb_ibuf_max_size }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.1.2', '>=') %}
+innodb-idle-flush-pct = {{ mariadbserver_innodb_idle_flush_pct }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.1.3', '>=') %}
+innodb-immediate-scrub-data-uncompressed = {{ mariadbserver_innodb_immediate_scrub_data_uncompressed }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '<') %}
+innodb-import-table-from-xtrabackup = {{ mariadbserver_innodb_import_table_from_xtrabackup }}
+{% endif %}
+# Startup error
+# innodb-index-stats = {{ mariadbserver_innodb_index_stats }}
+{% if mariadbserver_running_version.stdout | version_compare('10.1.3', '>=') %}
+innodb-instrument-semaphores = {{ mariadbserver_innodb_instrument_semaphore }}
+{% endif %}
+innodb-io-capacity = {{ mariadbserver_innodb_io_capacity }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '>=') %}
+innodb-io-capacity-max = {{ mariadbserver_innodb_io_capacity_max }}
+{% endif %}
+innodb-kill-idle-transaction = {{ mariadbserver_innodb_kill_idle_transaction }}
+innodb-large-prefix = {{ mariadbserver_innodb_large_prefix }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '<') %}
+innodb-lazy-drop-table = {{ mariadbserver_innodb_lazy_drop_table }}
+{% endif %}
+innodb-lock-wait-timeout = {{ mariadbserver_innodb_lock_wait_timeout }}
+innodb-lock-waits = {{ mariadbserver_innodb_lock_waits }}
+innodb-locking-fake-changes = {{ mariadbserver_innodb_locking_fake_changes }}
+innodb-locks = {{ mariadbserver_innodb_locks }}
+innodb-locks-unsafe-for-binlog = {{ mariadbserver_innodb_locks_unsafe_for_binlog }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.9', '>=') %}
+innodb-log-arch-dir = {{ mariadbserver_innodb_log_arch_dir }}
+innodb-log-arch-expire-sec = {{ mariadbserver_innodb_log_arch_expire_sec }}
+innodb-log-archive = {{ mariadbserver_innodb_log_archive }}
+{% endif %}
+innodb-log-block-size = {{ mariadbserver_innodb_log_block_size }}
+innodb-log-buffer-size = {{ mariadbserver_innodb_log_buffer_size }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.9', '>=') %}
+innodb-log-checksum-algorithm = {{ mariadbserver_innodb_log_checksum_algorithm }}
+innodb-log-compressed-pages = {{ mariadbserver_innodb_log_compressed_pages }}
+{% endif %}
+innodb-log-file-size = {{ mariadbserver_innodb_log_file_size }}
+innodb-log-files-in-group = {{ mariadbserver_innodb_log_files_in_group }}
+innodb-log-group-home-dir = {{ mariadbserver_innodb_log_group_home_dir }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '>=') %}
+innodb-lru-scan-depth = {{ mariadbserver_innodb_lru_scan_depth }}
+{% else %}
+# Startup error
+# innodb-lru-scan-depth = {{ mariadbserver_innodb_lru_scan_depth }}
+{% endif %}
+innodb-max-bitmap-file-size = {{ mariadbserver_innodb_max_bitmap_file_size }}
+innodb-max-changed-pages = {{ mariadbserver_innodb_max_changed_pages }}
+innodb-max-dirty-pages-pct = {{ mariadbserver_innodb_max_dirty_pages_pct }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '>=') %}
+innodb-max-dirty-pages-pct-lwm = {{ mariadbserver_innodb_max_dirty_pages_pct_lwm }}
+innodb-max-purge-lag-delay = {{ mariadbserver_innodb_max_purge_lag_delay }}
+{% endif %}
+innodb-max-purge-lag = {{ mariadbserver_innodb_max_purge_lag }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '<') %}
+innodb-merge-sort-block-size = {{ mariadbserver_innodb_merge_sort_block_size }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.1.0', '>=') %}
+innodb-mtflush-threads = {{ mariadbserver_innodb_mtflush_threads }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.0', '>=') %}
+{% if mariadbserver_innodb_monitor_disable %}
+innodb-monitor-disable = {{ mariadbserver_innodb_monitor_disable }}
+{% endif %}
+{% if mariadbserver_innodb_monitor_enable %}
+innodb-monitor-enable = {{ mariadbserver_innodb_monitor_enable }}
+{% endif %}
+{% if mariadbserver_innodb_monitor_reset %}
+innodb-monitor-reset = {{ mariadbserver_innodb_monitor_reset }}
+{% endif %}
+{% if mariadbserver_innodb_monitor_reset_all %}
+innodb-monitor-reset-all = {{ mariadbserver_innodb_monitor_reset_all }}
+{% endif %}
+{% endif %}
+innodb-old-blocks-pct = {{ mariadbserver_innodb_old_blocks_pct }}
+innodb-old-blocks-time = {{ mariadbserver_innodb_old_blocks_time }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '>=') %}
+innodb-online-alter-log-max-size = {{ mariadbserver_innodb_online_alter_log_max_size }}
+{% endif %}
+innodb-open-files = {{ mariadbserver_innodb_open_files }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '>=') %}
+innodb-optimize-fulltext-only = {{ mariadbserver_innodb_optimize_fulltext_only }}
+{% endif %}
+# Startup error
+# innodb-overwrite-relay-log-info = {{ mariadbserver_innodb_overwrite_relay_log_info }}
+innodb-page-size = {{ mariadbserver_innodb_page_size }}
+{% if mariadbserver_running_version.stdout | version_compare('10.1.2', '>=') %}
+innodb-prefix-index-cluster-optimization = {{ mariadbserver_innodb_prefix_index_cluster_optimization }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('5.5.30', '>=') %}
+innodb-print-all-deadlocks = {{ mariadbserver_innodb_print_all_deadlocks }}
+{% endif %}
+innodb-purge-batch-size = {{ mariadbserver_innodb_purge_batch_size }}
+innodb-purge-threads = {{ mariadbserver_innodb_purge_threads }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '<') %}
+innodb-read-ahead = {{ mariadbserver_innodb_read_ahead }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '>=') %}
+innodb-random-read-ahead = {{ mariadbserver_innodb_random_read_ahead }}
+{% endif %}
+innodb-read-ahead-threshold = {{ mariadbserver_innodb_read_ahead_threshold }}
+innodb-read-io-threads = {{ mariadbserver_innodb_read_io_threads }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '>=') %}
+innodb-read-only = {{ mariadbserver_innodb_read_only }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '<') %}
+innodb-recovery-stats = {{ mariadbserver_innodb_recovery_stats }}
+innodb-recovery-update-relay-log = {{ mariadbserver_innodb_recovery_update_relay_log }}
+{% endif %}
+innodb-replication-delay = {{ mariadbserver_innodb_replication_delay }}
+innodb-rollback-on-timeout = {{ mariadbserver_innodb_rollback_on_timeout }}
+innodb-rollback-segments = {{ mariadbserver_innodb_rollback_segments }}
+# Startup error
+# innodb-rseg = {{ mariadbserver_innodb_rseg }}
+{% if mariadbserver_running_version.stdout | version_compare('10.1.3', '>=') %}
+innodb-scrub-log = {{ mariadbserver_innodb_scrub_log }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.1.4', '>=') %}
+innodb-scrub-log-interval = {{ mariadbserver_innodb_scrub_log_interval }}
+innodb-scrub-log-speed = {{ mariadbserver_innodb_scrub_log_speed }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.9', '>=') %}
+innodb-sched-priority-cleaner = {{ mariadbserver_innodb_sched_priority_cleaner }}
+{% endif %}
+innodb-show-locks-held = {{ mariadbserver_innodb_show_locks_held }}
+innodb-show-verbose-locks = {{ mariadbserver_innodb_show_verbose_locks }}
+innodb-spin-wait-delay = {{ mariadbserver_innodb_spin_wait_delay }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '>=') %}
+innodb-sort-buffer-size = {{ mariadbserver_innodb_sort_buffer_size }}
+innodb-stats-auto-recalc = {{ mariadbserver_innodb_stats_auto_recalc }}
+{% endif %}
+innodb-stats-method = {{ mariadbserver_innodb_stats_method }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.15', '>=') %}
+innodb-stats-modified-counter = {{ mariadbserver_innodb_stats_modified_counter }}
+{% endif %}
+innodb-stats-on-metadata = {{ mariadbserver_innodb_stats_on_metadata }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '>=') %}
+innodb-stats-persistent = {{ mariadbserver_innodb_stats_persistent }}
+innodb-stats-persistent-sample-pages = {{ mariadbserver_innodb_stats_persistent_sample_pages }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '<') %}
+innodb-stats-sample-pages = {{ mariadbserver_innodb_stats_sample_pages }}
+{% endif %}
+innodb-stats-traditional = {{ mariadbserver_innodb_stats_traditional }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '>=') %}
+innodb-stats-transient-sample-pages = {{ mariadbserver_innodb_stats_transient_sample_pages }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '<') %}
+innodb-stats-update-need-lock = {{ mariadbserver_innodb_stats_update_need_lock }}
+{% endif %}
+innodb-status-file = {{ mariadbserver_innodb_status_file }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.14', '>=') %}
+innodb-status-output = {{ mariadbserver_innodb_status_output }}
+innodb-status-output-locks = {{ mariadbserver_innodb_status_output_locks }}
+{% endif %}
+innodb-strict-mode = {{ mariadbserver_innodb_strict_mode }}
+innodb-support-xa = {{ mariadbserver_innodb_support_xa }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.14', '>=') %}
+innodb-sync-array-size = {{ mariadbserver_innodb_sync_array_size }}
+{% endif %}
+innodb-sync-spin-loops = {{ mariadbserver_innodb_sync_spin_loops }}
+innodb-sys-indexes = {{ mariadbserver_innodb_sys_indexes }}
+# Startup error
+# innodb-sys-stats = {{ mariadbserver_innodb_sys_stats }}
+# innodb-table-stats = {{ mariadbserver_innodb_table_stats }}
+innodb-sys-tables = {{ mariadbserver_innodb_sys_tables }}
+innodb-table-locks = {{ mariadbserver_innodb_table_locks }}
+innodb-thread-concurrency = {{ mariadbserver_innodb_thread_concurrency }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '<') %}
+innodb-thread-concurrency-timer-based = {{ mariadbserver_innodb_thread_concurrency_timer_based }}
+{% endif %}
+innodb-thread-sleep-delay = {{ mariadbserver_innodb_thread_sleep_delay }}
+innodb-track-changed-pages = {{ mariadbserver_innodb_track_changed_pages }}
+innodb-trx = {{ mariadbserver_innodb_trx }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '>=') %}
+innodb-undo-directory = {{ mariadbserver_innodb_undo_directory }}
+innodb-undo-logs = {{ mariadbserver_innodb_undo_logs }}
+innodb-undo-tablespaces = {{ mariadbserver_innodb_undo_tablespaces }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('5.5.31', '>=') %}
+innodb-use-atomic-writes = {{ mariadbserver_innodb_use_atomic_writes }}
+innodb-use-fallocate = {{ mariadbserver_innodb_use_fallocate }}
+{% endif %}
+innodb-use-global-flush-log-at-trx-commit = {{ mariadbserver_innodb_use_global_flush_log_at_trx_commit }}
+{% if mariadbserver_running_version.stdout | version_compare('10.1.0', '>=') %}
+innodb-use-mtflush = {{ mariadbserver_use_mtflush }}
+{% endif %}
+innodb-use-native-aio = {{ mariadbserver_innodb_use_native_aio }}
+{% if mariadbserver_running_version.stdout | version_compare('5.5.34', '>=') %}
+innodb-use-stacktrace = {{ mariadbserver_innodb_use_stacktrace }}
+{% endif %}
+innodb-use-sys-malloc = {{ mariadbserver_innodb_use_sys_malloc }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '<') %}
+innodb-use-sys-stats-table = {{ mariadbserver_innodb_use_sys_stats_table }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.1.0', '>=') %}
+innodb-use-trim = {{ mariadbserver_innodb_use_trim }}
+{% endif %}
+innodb-write-io-threads = {{ mariadbserver_innodb_write_io_threads }}
+

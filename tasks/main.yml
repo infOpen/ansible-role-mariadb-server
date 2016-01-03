@@ -2,3 +2,27 @@
 
 # Main tasks file for mariadb-server role
 
+- name: Load the OS specific varibles
+  include_vars: "{{ role_path }}/vars/{{ ansible_distribution }}.yml"
+
+
+- include: install_ubuntu.yml
+  tags:
+    - install
+    - mariadb-server
+  when: ansible_distribution == 'Ubuntu'
+
+
+# Configure mariadb
+- include: configure.yml
+  tags:
+    - config
+    - mariadb-server
+
+
+# Manage accounts
+- include: manage_accounts.yml
+  tags:
+    - config
+    - mariadb-server
+
