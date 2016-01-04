@@ -135,7 +135,7 @@ mariadbserver_report_port: 0
 mariadbserver_report_user: ''
 mariadbserver_rpl_recovery_rank: 0
 mariadbserver_server_id: 1
-mariadbserver_slave_compressed_protocol: 0
+mariadbserver_slave_compressed_protocol: 'FALSE'
 mariadbserver_slave_ddl_exec_mode: 'IDEMPOTENT'
 mariadbserver_slave_domain_parallel_threads: 0
 mariadbserver_slave_exec_mode: 'STRICT'
@@ -412,7 +412,7 @@ mariadbserver_innodb_read_only: 'OFF'
 mariadbserver_innodb_recovery_stats: 'OFF'
 mariadbserver_innodb_recovery_update_relay_log: 'OFF'
 mariadbserver_innodb_replication_delay: 0
-mariadbserver_innodb_rollback_on_timeout: 0
+mariadbserver_innodb_rollback_on_timeout: 'FALSE'
 mariadbserver_innodb_rollback_segments: 128
 mariadbserver_innodb_rseg: 'FALSE'
 mariadbserver_innodb_scrub_log_interval: 56
@@ -545,7 +545,7 @@ mariadbserver_connect_xtrace: 0
 # Other options
 # https://mariadb.com/kb/en/mariadb/mysqld-options/#other-options
 mariadbserver_allow_suspicious_udfs: 'FALSE'
-mariadbserver_automatic_sp_privileges: 1
+mariadbserver_automatic_sp_privileges: 'TRUE'
 mariadbserver_back_log: 150
 mariadbserver_basedir: '/usr'
 mariadbserver_bind_address: '127.0.0.1'
@@ -711,8 +711,8 @@ mariadbserver_tmpdir: '/tmp'
 mariadbserver_transaction_alloc_block_size: 8192
 mariadbserver_transaction_prealloc_size: 4096
 mariadbserver_transaction_isolation: 'REPEATABLE-READ'
-mariadbserver_transaction_read_only: 'OFF-READ'
-mariadbserver_updatable_views_with_limit: 1
+mariadbserver_transaction_read_only: 'FALSE'
+mariadbserver_updatable_views_with_limit: 'YES'
 mariadbserver_user: 'mysql'
 mariadbserver_userstat: 'FALSE'
 mariadbserver_verbose: 'TRUE'
