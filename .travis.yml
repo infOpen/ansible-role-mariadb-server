@@ -17,6 +17,11 @@ env:
   - ANSIBLE_ROLES_PATH="${TRAVIS_BUILD_DIR%/*/*}" MARIADB_VERSION="10.0"
 
 before_install:
+  # Remove existing mysql package and data
+  - sudo apt-get purge mysql-common -y
+  - sudo rm -rf /var/lib/mysql
+  - sudo rm -rf /etc/mysql
+
   # Make sure everything's up to date.
   - sudo apt-get update -qq
 
