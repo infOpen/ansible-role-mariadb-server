@@ -25,8 +25,9 @@ install:
   # Remove existing mysql package and data
   - sudo ps aux
   - sudo netstat -anp
+  - sudo ls -lhr /etc/mysql
   - sudo apt-get remove mysql-common mysql-server-5.5 mysql-server-core-5.5 mysql-client-5.5 mysql-client-core-5.5 -y
-  - sudo apt-get autoremove
+  - sudo apt-get autoremove -y
   - sudo rm -rf /var/lib/mysql
   - sudo rm -rf /etc/mysql
   - sudo service --status-all
