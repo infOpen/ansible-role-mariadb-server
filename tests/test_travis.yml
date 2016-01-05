@@ -8,4 +8,6 @@
     - "infOpen/ansible-role-mariadb-server"
   post_tasks:
     - include: ./test_common.yml
+  vars:
+    mariadbserver_version: "{{ lookup('env', 'MARIADB_VERSION') }}"
 
