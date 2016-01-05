@@ -275,13 +275,13 @@ mariadbserver_innodb_buffer_pool_load_now: 'OFF'
 mariadbserver_innodb_buffer_pool_page: 'ON'
 mariadbserver_innodb_buffer_pool_populate: 'OFF'
 mariadbserver_innodb_buffer_pool_restore_at_startup: 0
-mariadbserver_innodb_buffer_pool_shm_checksum: 'ON'
+mariadbserver_innodb_buffer_pool_shm_checksum: 'TRUE'
 mariadbserver_innodb_buffer_pool_shm_key: 0
 mariadbserver_innodb_buffer_pool_size: 134217728
 mariadbserver_innodb_change_buffer_max_size: 25
 mariadbserver_innodb_change_buffering: 'all'
 mariadbserver_innodb_checkpoint_age_target: 0
-mariadbserver_innodb_checksums: 'ON'
+mariadbserver_innodb_checksums: 'TRUE'
 mariadbserver_innodb_checksum_algorithm: 'innodb'
 mariadbserver_innodb_cleaner_lsn_age_factor: 'high_checkpoint'
 mariadbserver_innodb_cmp: 'ON'
@@ -319,7 +319,7 @@ mariadbserver_innodb_encryption_threads: 0
 mariadbserver_innodb_expand_import: 0
 mariadbserver_innodb_extra_undoslots: 'OFF'
 mariadbserver_innodb_fake_changes: 'OFF'
-mariadbserver_innodb_fast_checksum: 'OFF'
+mariadbserver_innodb_fast_checksum: 'FALSE'
 mariadbserver_innodb_fast_recovery: 'OFF'
 mariadbserver_innodb_fast_shutdown: 1
 mariadbserver_innodb_fatal_semaphore_wait_threshold: 600
@@ -409,8 +409,8 @@ mariadbserver_innodb_read_ahead: 'linear'
 mariadbserver_innodb_read_ahead_threshold: 56
 mariadbserver_innodb_read_io_threads: 4
 mariadbserver_innodb_read_only: 'OFF'
-mariadbserver_innodb_recovery_stats: 'OFF'
-mariadbserver_innodb_recovery_update_relay_log: 'OFF'
+mariadbserver_innodb_recovery_stats: 'FALSE'
+mariadbserver_innodb_recovery_update_relay_log: 'FALSE'
 mariadbserver_innodb_replication_delay: 0
 mariadbserver_innodb_rollback_on_timeout: 'FALSE'
 mariadbserver_innodb_rollback_segments: 128
@@ -445,7 +445,7 @@ mariadbserver_innodb_sys_tables: 'ON'
 mariadbserver_innodb_table_locks: 'ON'
 mariadbserver_innodb_table_stats: 'ON'
 mariadbserver_innodb_thread_concurrency: 0
-mariadbserver_innodb_thread_concurrency_timer_based: 'OFF'
+mariadbserver_innodb_thread_concurrency_timer_based: 'FALSE'
 mariadbserver_innodb_thread_sleep_delay: 10000
 mariadbserver_innodb_track_changed_pages: 'OFF'
 mariadbserver_innodb_trx: 'ON'
@@ -459,7 +459,7 @@ mariadbserver_innodb_use_mtflush: 'OFF'
 mariadbserver_innodb_use_native_aio: 'ON'
 mariadbserver_innodb_use_stacktrace: 'OFF'
 mariadbserver_innodb_use_sys_malloc: 'ON'
-mariadbserver_innodb_use_sys_stats_table: 0
+mariadbserver_innodb_use_sys_stats_table: 'FALSE'
 mariadbserver_innodb_use_trim: 'OFF'
 mariadbserver_innodb_write_io_threads: 4
 
