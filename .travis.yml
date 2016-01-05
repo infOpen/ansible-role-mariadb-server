@@ -17,17 +17,20 @@ env:
   - ANSIBLE_ROLES_PATH="${TRAVIS_BUILD_DIR%/*/*}" MARIADB_VERSION="10.0"
 
 before_install:
-  # Remove existing mysql package and data
-  - sudo ps aux | grep mysql
-  - sudo pkill mysql
-  - sudo apt-get purge mysql-* -y
-  - sudo rm -rf /var/lib/mysql
-  - sudo rm -rf /etc/mysql
 
   # Make sure everything's up to date.
   - sudo apt-get update -qq
 
 install:
+  # Remove existing mysql package and data
+  - sudo ps aux
+  - sudo netstat -anp
+  - sudo apt-get remove mysql-common mysql-server-5.5 mysql-server-core-5.5 mysql-client-5.5 mysql-client-core-5.5 -y
+  - sudo apt-get autoremove
+  - sudo rm -rf /var/lib/mysql
+  - sudo rm -rf /etc/mysql
+  - sudo service --status-all
+
   # Install ruby dependencies to run serverspec tests
   - bundle install
 
