@@ -18,7 +18,7 @@ env:
 
 before_install:
   # Remove existing mysql package and data
-  - sudo /etc/init.d/mysql stop
+  - sudo ls -lh /etc/init.d/
   - sudo apt-get purge mysql-* -y
   - sudo rm -rf /var/lib/mysql
   - sudo rm -rf /etc/mysql
