@@ -18,7 +18,8 @@ env:
 
 before_install:
   # Remove existing mysql package and data
-  - sudo ls -lh /etc/init.d/
+  - sudo ps aux | grep mysql
+  - sudo pkill mysql
   - sudo apt-get purge mysql-* -y
   - sudo rm -rf /var/lib/mysql
   - sudo rm -rf /etc/mysql
@@ -52,5 +53,5 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
 
   # Run serverspec tests
-  - bundle exec rake
+  - bundle exec rake spec
 
