@@ -25,6 +25,21 @@ mariadbserver_managed_by_phpmyadmin: False
 mariadbserver_owner: mysql
 mariadbserver_group: mysql
 
+# File permission
+#----------------
+mariadbserver_config_file_owner: root
+mariadbserver_config_file_group: root
+mariadbserver_config_file_mode: "0644"
+
+mariadbserver_logrotate_file_name: /etc/logrotate.d/mariadb-server
+mariadbserver_logrotate_file_owner: root
+mariadbserver_logrotate_file_group: root
+mariadbserver_logrotate_file_mode: "0600"
+
+mariadbserver_binary_log_dir_owner: "{{ mariadbserver_owner }}"
+mariadbserver_binary_log_dir_group: "{{ mariadbserver_group }}"
+mariadbserver_binary_log_dir_mode: "0750"
+
 
 #==============================================================================
 # Credentials

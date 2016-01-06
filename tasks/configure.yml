@@ -13,10 +13,10 @@
   become: True
   file:
     path: "{{ mariadbserver_log_bin | dirname }}"
-    group: "{{ mariadbserver_group }}"
-    owner: "{{ mariadbserver_owner }}"
+    group: "{{ mariadbserver_binary_log_dir_group }}"
+    owner: "{{ mariadbserver_binary_log_dir_owner }}"
     state: directory
-    mode: 0750
+    mode: "{{ mariadbserver_binary_log_dir_mode }}"
 
 
 - name: stop mariadb if datadir move is needed
@@ -47,9 +47,9 @@
   template:
     src: "{{ item }}"
     dest: "{{ mariadbserver_config_file_location }}"
-    group: root
-    owner: root
-    mode: 0644
+    group: "{{ mariadbserver_config_file_group }}"
+    owner: "{{ mariadbserver_config_file_owner }}"
+    mode: "{{ mariadbserver_config_file_mode }}"
   with_first_found:
     - "{{ inventory_dir }}/templates/mariadb-server/my.cnf_{{ mariadbserver_version }}.j2"
     - "{{ inventory_dir }}/templates/mariadb-server/my.cnf.j2"
@@ -62,10 +62,10 @@
   become: True
   template:
     src: "{{ item }}"
-    dest: /etc/logrotate.d/mariadb-server
-    group: root
-    owner: root
-    mode: 0600
+    dest: "{{ mariadbserver_logrotate_file_name }}"
+    group: "{{ mariadbserver_logrotate_file_group }}"
+    owner: "{{ mariadbserver_logrotate_file_owner }}"
+    mode: "{{ mariadbserver_logrotate_file_mode }}"
   with_first_found:
     - "{{ inventory_dir }}/templates/mariadb-server/logrotate_mariadb"
     - "{{ role_path }}/templates/logrotate_mariadb.j2"
