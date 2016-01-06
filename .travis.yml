@@ -55,6 +55,9 @@ script:
 
   # Start service in case it not started
   - sudo /etc/init.d/mysql start
+  - sudo ps aux
+  - sudo netstat -anp
+  - sudo /etc/init.d/mysql status
 
   # Run serverspec tests
   - bundle exec rake
