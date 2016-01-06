@@ -1,0 +1,49 @@
+
+# Optimizer options
+#------------------
+# https://mariadb.com/kb/en/mariadb/mysqld-options/#optimizer-options
+
+big-tables = {{ mariadbserver_big_tables }}
+bulk-insert-buffer-size = {{ mariadbserver_bulk_insert_buffer_size }}
+{% if mariadbserver_running_version.stdout | version_compare('5.5.25', '>=') %}
+expensive-subquery-limit = {{ mariadbserver_expensive_subquery_limit }}
+{% endif %}
+join-buffer-size = {{ mariadbserver_join_buffer_size }}
+{% if mariadbserver_running_version.stdout | version_compare('5.3', '>=') %}
+join-buffer-space-limit = {{ mariadbserver_join_buffer_space_limit }}
+join-cache-level = {{ mariadbserver_join_cache_level }}
+{% endif %}
+max-heap-table-size = {{ mariadbserver_max_heap_table_size }}
+max-join-size = {{ mariadbserver_max_join_size }}
+max-seeks-for-key = {{ mariadbserver_max_seeks_for_key }}
+max-sort-length = {{ mariadbserver_max_sort_length }}
+{% if mariadbserver_running_version.stdout | version_compare('5.3', '>=') %}
+mrr-buffer-size = {{ mariadbserver_mrr_buffer_size }}
+{% endif %}
+optimizer-prune-level = {{ mariadbserver_optimizer_prune_level }}
+optimizer-search-depth = {{ mariadbserver_optimizer_search_depth }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0', '>=') %}
+optimizer-selectivity-sampling-limit = {{ mariadbserver_optimizer_selectivity_sampling_limit }}
+optimizer-use-condition-selectivity = {{ mariadbserver_optimizer_use_condition_selectivity }}
+{% endif %}
+optimizer-switch = {{ mariadbserver_optimizer_switch | join(',') }}
+query-alloc-block-size = {{ mariadbserver_query_alloc_block_size }}
+query-prealloc-size = {{ mariadbserver_query_prealloc_size }}
+range-alloc-block-size = {{ mariadbserver_range_alloc_block_size }}
+read-buffer-size = {{ mariadbserver_read_buffer_size }}
+{% if mariadbserver_running_version.stdout | version_compare('5.5', '<') %}
+record-buffer = {{ mariadbserver_read_buffer_size }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('5.3.0', '>=') %}
+rowid-merge-buff-size = {{ mariadbserver_rowid_merge_buff_size }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('5.1.3', '<') %}
+table-cache = {{ mariadbserver_table_open_cache }}
+{% endif %}
+table-definition-cache = {{ mariadbserver_table_definition_cache }}
+table-open-cache = {{ mariadbserver_table_open_cache }}
+tmp-table-size = {{ mariadbserver_tmp_table_size }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.1', '>=') %}
+use-stat-tables = {{ mariadbserver_use_stat_tables }}
+{% endif %}
+

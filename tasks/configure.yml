@@ -1,0 +1,80 @@
+---
+
+# Configure mariadb-server
+
+- name: stat datadir exists
+  become: True
+  stat:
+    path: "{{ mariadbserver_datadir }}"
+  register: mariadbserver_datadir_stat
+
+
+- name: create binary logs directory
+  become: True
+  file:
+    path: "{{ mariadbserver_log_bin | dirname }}"
+    group: "{{ mariadbserver_binary_log_dir_group }}"
+    owner: "{{ mariadbserver_binary_log_dir_owner }}"
+    state: directory
+    mode: "{{ mariadbserver_binary_log_dir_mode }}"
+
+
+- name: stop mariadb if datadir move is needed
+  become: True
+  service:
+    name: "{{ mariadbserver_service_name }}"
+    state: stopped
+  when: not mariadbserver_datadir_stat.stat.exists
+
+
+- name: get current datadir configuration
+  become: True
+  command: "grep -E '[^#]?datadir' {{ mariadbserver_config_file_location }}"
+  ignore_errors: yes
+  register: mariadbserver_current_datadir
+  when: not mariadbserver_datadir_stat.stat.exists
+
+
+- name: move mariadb data to data disk
+  become: True
+  become_user: "{{ mariadbserver_owner }}"
+  command: "mv {{ mariadbserver_current_datadir.stdout.split('=')[1] | trim }} {{ mariadbserver_datadir }}"
+  when: not mariadbserver_datadir_stat.stat.exists
+
+
+- name: generate custom role config file
+  become: True
+  template:
+    src: "{{ item }}"
+    dest: "{{ mariadbserver_config_file_location }}"
+    group: "{{ mariadbserver_config_file_group }}"
+    owner: "{{ mariadbserver_config_file_owner }}"
+    mode: "{{ mariadbserver_config_file_mode }}"
+  with_first_found:
+    - "{{ inventory_dir }}/templates/mariadb-server/my.cnf_{{ mariadbserver_version }}.j2"
+    - "{{ inventory_dir }}/templates/mariadb-server/my.cnf.j2"
+    - "{{ role_path }}/templates/my.cnf_{{ mariadbserver_version }}.j2"
+    - "{{ role_path }}/templates/my.cnf.j2"
+  notify:
+    - restart mariadb
+
+- name: generate logrotate configuration
+  become: True
+  template:
+    src: "{{ item }}"
+    dest: "{{ mariadbserver_logrotate_file_name }}"
+    group: "{{ mariadbserver_logrotate_file_group }}"
+    owner: "{{ mariadbserver_logrotate_file_owner }}"
+    mode: "{{ mariadbserver_logrotate_file_mode }}"
+  with_first_found:
+    - "{{ inventory_dir }}/templates/mariadb-server/logrotate_mariadb"
+    - "{{ role_path }}/templates/logrotate_mariadb.j2"
+
+
+- name: enable mariadb service on boot
+  become: True
+  service:
+    name: "{{ mariadbserver_service_name }}"
+    enabled: "{{ mariadbserver_service_enabled }}"
+    state: "{{ mariadbserver_service_state }}"
+

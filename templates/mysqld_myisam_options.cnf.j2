@@ -1,0 +1,37 @@
+
+# MyISAM options
+#---------------
+# https://mariadb.com/kb/en/mariadb/mysqld-options/#myisam-options
+
+concurrent-insert = {{ mariadbserver_concurrent_insert }}
+delayed-insert-limit = {{ mariadbserver_delayed_insert_limit }}
+delayed-insert-timeout = {{ mariadbserver_delayed_insert_timeout }}
+delayed-queue-size = {{ mariadbserver_delayed_queue_size }}
+external-locking = {{ mariadbserver_external_locking }}
+{% if mariadbserver_ft_stopword_file %}
+ft-stopword-file = {{ mariadbserver_ft_stopword_file }}
+{% endif %}
+keep-files-on-create = {{ mariadbserver_keep_files_on_create }}
+key-buffer-size = {{ mariadbserver_key_buffer_size }}
+key-cache-age-threshold = {{ mariadbserver_key_cache_age_threshold }}
+key-cache-block-size = {{ mariadbserver_key_cache_block_size }}
+key-cache-division-limit = {{ mariadbserver_key_cache_division_limit }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.13', '>=') %}
+key-cache-file-hash-size = {{ mariadbserver_key_cache_file_hash_size }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('5.2.0', '>=') %}
+key-cache-segments = {{ mariadbserver_key_cache_segments }}
+{% endif %}
+log-isam = {{ mariadbserver_log_isam }}
+{% if mariadbserver_running_version.stdout | version_compare('5.2.6', '>=') %}
+myisam-block-size = {{ mariadbserver_myisam_block_size }}
+{% endif %}
+myisam-data-pointer-size = {{ mariadbserver_myisam_data_pointer_size }}
+myisam-max-sort-file-size = {{ mariadbserver_myisam_max_sort_file_size }}
+myisam-mmap-size = {{ mariadbserver_myisam_mmap_size }}
+myisam-recover-options = {{ mariadbserver_myisam_recover_options }}
+myisam-repair-threads = {{ mariadbserver_myisam_repair_threads }}
+myisam-sort-buffer-size = {{ mariadbserver_myisam_sort_buffer_size }}
+myisam-stats-method = {{ mariadbserver_myisam_stats_method }}
+myisam-use-mmap = {{ mariadbserver_myisam_use_mmap }}
+

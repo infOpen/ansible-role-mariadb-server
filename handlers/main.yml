@@ -1,0 +1,10 @@
+---
+
+# Handlers main file for mariadb-server role
+
+- name: restart mariadb
+  become: True
+  service:
+    name: "{{ mariadbserver_service_name }}"
+    state: restarted
+

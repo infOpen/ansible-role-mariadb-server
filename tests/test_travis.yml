@@ -1,0 +1,13 @@
+---
+
+# Tests for mariadb-server role
+
+- hosts: localhost
+  remote_user: root
+  roles:
+    - "infOpen/ansible-role-mariadb-server"
+  post_tasks:
+    - include: ./test_common.yml
+  vars:
+    mariadbserver_version: "{{ lookup('env', 'MARIADB_VERSION') }}"
+

@@ -1,0 +1,50 @@
+
+# Performance schema options
+#---------------------------
+# https://mariadb.com/kb/en/mariadb/mysqld-options/#performance-schema-options
+
+performance-schema = {{ mariadbserver_performance_schema }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.0', '>=') %}
+performance-schema-accounts-size = {{ mariadbserver_performance_schema_accounts_size }}
+performance-schema-digests-size = {{ mariadbserver_performance_schema_digests_size }}
+performance-schema-events-stages-history-long-size = {{ mariadbserver_performance_schema_events_stages_history_long_size }}
+performance-schema-events-stages-history-size = {{ mariadbserver_performance_schema_events_stages_history_size }}
+performance-schema-events-statements-history-long-size = {{ mariadbserver_performance_schema_events_statements_history_long_size }}
+performance-schema-events-statements-history-size = {{ mariadbserver_performance_schema_events_statements_history_size }}
+{% endif %}
+performance-schema-events-waits-history-long-size = {{ mariadbserver_performance_schema_events_waits_history_long_size }}
+performance-schema-events-waits-history-size = {{ mariadbserver_performance_schema_events_waits_history_size }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.0', '>=') %}
+performance-schema-hosts-size = {{ mariadbserver_performance_schema_hosts_size }}
+{% endif %}
+performance-schema-max-cond-classes = {{ mariadbserver_performance_schema_max_cond_classes }}
+performance-schema-max-cond-instances = {{ mariadbserver_performance_schema_max_cond_instances }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.21', '>=') %}
+performance-schema-max-digest-length = {{ mariadbserver_performance_schema_max_digest_length }}
+{% endif %}
+performance-schema-max-file-classes = {{ mariadbserver_performance_schema_max_file_classes }}
+performance-schema-max-file-handles = {{ mariadbserver_performance_schema_max_file_handles }}
+performance-schema-max-file-instances = {{ mariadbserver_performance_schema_max_file_instances }}
+performance-schema-max-mutex-classes = {{ mariadbserver_performance_schema_max_mutex_classes }}
+performance-schema-max-mutex-instances = {{ mariadbserver_performance_schema_max_mutex_instances }}
+performance-schema-max-rwlock-classes = {{ mariadbserver_performance_schema_max_rwlock_classes }}
+performance-schema-max-rwlock-instances = {{ mariadbserver_performance_schema_max_rwlock_instances }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.0', '>=') %}
+performance-schema-max-socket-classes = {{ mariadbserver_performance_schema_max_socket_classes }}
+performance-schema-max-socket-instances = {{ mariadbserver_performance_schema_max_socket_instances }}
+performance-schema-max-stage-classes = {{ mariadbserver_performance_schema_max_stage_classes }}
+performance-schema-max-statement-classes = {{ mariadbserver_performance_schema_max_statement_classes }}
+{% endif %}
+performance-schema-max-table-handles = {{ mariadbserver_performance_schema_max_table_handles }}
+performance-schema-max-table-instances = {{ mariadbserver_performance_schema_max_table_instances }}
+performance-schema-max-thread-classes = {{ mariadbserver_performance_schema_max_thread_classes }}
+performance-schema-max-thread-instances = {{ mariadbserver_performance_schema_max_thread_instances }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.4', '>=') %}
+performance-schema-session-connect-attrs-size = {{ mariadbserver_performance_schema_session_connect_attrs_size }}
+{% endif %}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.0', '>=') %}
+performance-schema-setup-actors-size = {{ mariadbserver_performance_schema_setup_actors_size }}
+performance-schema-setup-objects-size = {{ mariadbserver_performance_schema_setup_objects_size }}
+performance-schema-users-size = {{ mariadbserver_performance_schema_users_size }}
+{% endif %}
+

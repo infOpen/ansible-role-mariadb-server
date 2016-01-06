@@ -1,0 +1,35 @@
+
+# Aria options
+#-------------
+# https://mariadb.com/kb/en/mariadb/mysqld-options/#aria-options
+
+aria-block-size = {{ mariadbserver_aria_block_size }}
+aria-checkpoint-interval = {{ mariadbserver_aria_checkpoint_interval }}
+aria-checkpoint-log-activity = {{ mariadbserver_aria_checkpoint_log_activity }}
+{% if mariadbserver_running_version.stdout | version_compare('10.1.3', '>=') %}
+aria-encrypt-tables = {{ mariadbserver_aria_encrypt_tables }}
+{% endif %}
+aria-force-start-after-recovery-failures = {{ mariadbserver_aria_force_start_after_recovery_failures }}
+aria-group-commit = {{ mariadbserver_aria_group_commit }}
+aria-group-commit-interval = {{ mariadbserver_aria_group_commit_interval }}
+aria-log-dir-path = {{ mariadbserver_aria_log_dir_path }}
+aria-log-file-size = {{ mariadbserver_aria_log_file_size }}
+aria-log-purge-type = {{ mariadbserver_aria_log_purge_type }}
+aria-max-sort-file-size = {{ mariadbserver_aria_max_sort_file_size }}
+aria-page-checksum = {{ mariadbserver_aria_page_checksum }}
+aria-pagecache-age-threshold = {{ mariadbserver_aria_pagecache_age_threshold }}
+aria-pagecache-buffer-size = {{ mariadbserver_aria_pagecache_buffer_size }}
+aria-pagecache-division-limit = {{ mariadbserver_aria_pagecache_division_limit }}
+{% if mariadbserver_running_version.stdout | version_compare('10.0.13', '>=') %}
+aria-pagecache-file-hash-size = {{ mariadbserver_aria_pagecache_file_hash_size }}
+{% endif %}
+aria-recover = {{ mariadbserver_aria_recover }}
+aria-repair-threads = {{ mariadbserver_aria_repair_threads }}
+aria-sort-buffer-size = {{ mariadbserver_aria_sort_buffer_size }}
+aria-stats-method = {{ mariadbserver_aria_stats_method }}
+aria-sync-log-dir = {{ mariadbserver_aria_sync_log_dir }}
+deadlock-search-depth-long = {{ mariadbserver_deadlock_search_depth_long }}
+deadlock-search-depth-short = {{ mariadbserver_deadlock_search_depth_short }}
+deadlock-timeout-long = {{ mariadbserver_deadlock_timeout_long }}
+deadlock-timeout-short = {{ mariadbserver_deadlock_timeout_short }}
+

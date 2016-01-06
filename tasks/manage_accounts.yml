@@ -1,0 +1,83 @@
+---
+
+# Manage DB users
+
+- name: check if root password need to be changed
+  register: mariadbserver_check_old_password
+  mysql_variables:
+    login_host: "127.0.0.1"
+    login_user: root
+    login_password: "{{ mariadbserver_root_db_old_password }}"
+    variable: max_connections
+  changed_when: False
+  ignore_errors: True
+  when: mariadbserver_root_db_password != mariadbserver_root_db_old_password
+
+
+- name: update mariadb root password for all localhost root accounts
+  mysql_user:
+    name: root
+    host: "{{ item }}"
+    password: "{{ mariadbserver_root_db_password }}"
+    login_user: root
+    login_password: "{{ mariadbserver_root_db_old_password }}"
+    check_implicit_admin: yes
+  when:
+    - mariadbserver_root_db_password != mariadbserver_root_db_old_password
+    - mariadbserver_check_old_password.failed is not defined
+  with_items:
+    - 127.0.0.1
+    - ::1
+    - localhost
+
+
+- name: update mariadb root password for hostname root account
+  mysql_user:
+    name: root
+    host: "{{ ansible_hostname }}"
+    password: "{{ mariadbserver_root_db_password }}"
+    login_user: root
+    login_password: "{{ mariadbserver_root_db_password }}"
+    check_implicit_admin: yes
+  when:
+    - mariadbserver_root_db_password != mariadbserver_root_db_old_password
+    - mariadbserver_check_old_password.failed is not defined
+
+
+- name: manage mariadb global accounts
+  mysql_user:
+    name: "{{ item.name }}"
+    host: "{{ item.host }}"
+    password: "{{ item.password }}"
+    state: "{{ item.state }}"
+    priv: "{{ item.privileges | join('/') }}"
+    login_user: root
+    login_password: "{{ mariadbserver_root_db_password }}"
+  with_items:
+    - "{{ mariadbserver_global_accounts }}"
+    - "{{ mariadbserver_additionnal_accounts }}"
+
+
+- name: generate credentials files for global accounts
+  template:
+    src: "{{ role_path }}/templates/my_credentials.cnf.j2"
+    dest: "{{ item.1.path }}"
+    owner: "{{ item.1.owner }}"
+    group: "{{ item.1.group }}"
+    mode: "{{ item.1.mode }}"
+  with_subelements:
+    - mariadbserver_global_accounts
+    - files
+
+
+- name: generate credentials files for additionnal accounts
+  template:
+    src: "{{ role_path }}/templates/my_credentials.cnf.j2"
+    dest: "{{ item.1.path }}"
+    owner: "{{ item.1.owner }}"
+    group: "{{ item.1.group }}"
+    mode: "{{ item.1.mode }}"
+  with_subelements:
+    - mariadbserver_additionnal_accounts
+    - files
+

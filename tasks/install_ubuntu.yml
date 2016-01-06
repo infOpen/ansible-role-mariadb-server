@@ -1,0 +1,51 @@
+---
+
+- name: Check if 5.5 version is applicable
+  fail:
+    msg: "MariaDB 5.5 package not exists for this Ubuntu version"
+  when:
+    - mariadbserver_version == '5.5'
+    - ansible_distribution_release != 'trusty'
+
+- name: Add repository key
+  become: True
+  apt_key:
+    id: "{{ mariadbserver_repository_key_id }}"
+    keyserver: "{{ mariadbserver_repository_key_server }}"
+    state: present
+  register: mariadbserver_add_key
+
+- name: Create source.list file
+  become: True
+  copy:
+    content: "{{ mariadbserver_repository_entry }}"
+    dest: "{{ mariadbserver_repository_directory
+      ~ '/' ~ mariadbserver_repository_file_name | trim }}"
+    mode: "{{ mariadbserver_repository_file_mode }}"
+    owner: "{{ mariadbserver_repository_file_owner }}"
+    group: "{{ mariadbserver_repository_file_group }}"
+  register: mariadbserver_add_source
+
+- name: Update apt cache if needed
+  become: True
+  apt:
+    update_cache: True
+  when:
+    mariadbserver_add_source.changed or mariadbserver_add_key.changed
+
+- name: Install mariadb-server packages
+  become: True
+  apt:
+    name: "{{ item }}"
+    state: "{{ mariadbserver_package_state }}"
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+  with_items: "{{ mariadbserver_packages }}"
+  notify:
+    - restart mariadb
+
+- name: Get mariadb server version
+  shell: apt-cache policy mariadb-server | awk '$1=="Installed:" { print $2 }'
+  register: mariadbserver_running_version
+  changed_when: False
+
