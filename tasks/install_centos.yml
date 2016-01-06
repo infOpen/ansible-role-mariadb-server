@@ -1,6 +1,6 @@
 ---
 
-- name: Create source.list file
+- name: Create .repo file
   become: True
   copy:
     content: "{{ mariadbserver_repository_entry }}"

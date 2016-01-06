@@ -3,21 +3,13 @@
 # Main tasks file for mariadb-server role
 
 - name: Load the OS specific varibles
-  include_vars: "{{ role_path }}/vars/{{ ansible_distribution }}.yml"
+  include_vars: "{{ role_path }}/vars/{{ ansible_distribution | lower }}.yml"
 
 
-- include: install_ubuntu.yml
+- include: "install_{{ ansible_distribution | lower }}.yml"
   tags:
     - install
     - mariadb-server
-  when: ansible_distribution == 'Ubuntu'
-
-
-- include: install_centos.yml
-  tags:
-    - install
-    - mariadb-server
-  when: ansible_distribution == 'CentOS'
 
 
 # Configure mariadb
