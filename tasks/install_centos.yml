@@ -1,0 +1,28 @@
+---
+
+- name: Create source.list file
+  become: True
+  copy:
+    content: "{{ mariadbserver_repository_entry }}"
+    dest: "{{ mariadbserver_repository_directory
+      ~ '/' ~ mariadbserver_repository_file_name | trim }}"
+    mode: "{{ mariadbserver_repository_file_mode }}"
+    owner: "{{ mariadbserver_repository_file_owner }}"
+    group: "{{ mariadbserver_repository_file_group }}"
+  register: mariadbserver_add_source
+
+- name: Install mariadb-server packages
+  become: True
+  yum:
+    name: "{{ item }}"
+    state: "{{ mariadbserver_package_state }}"
+  with_items: "{{ mariadbserver_packages }}"
+  notify:
+    - restart mariadb
+
+- name: Get mariadb server version
+  become: True
+  shell: yum info MariaDB-server | awk '$1=="Version" { print $3 }'
+  register: mariadbserver_running_version
+  changed_when: False
+

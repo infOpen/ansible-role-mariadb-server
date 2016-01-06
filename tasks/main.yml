@@ -13,6 +13,13 @@
   when: ansible_distribution == 'Ubuntu'
 
 
+- include: install_centos.yml
+  tags:
+    - install
+    - mariadb-server
+  when: ansible_distribution == 'CentOS'
+
+
 # Configure mariadb
 - include: configure.yml
   tags:
