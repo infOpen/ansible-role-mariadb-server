@@ -28,6 +28,7 @@ install:
   - sudo apt-get autoremove -y
   - sudo rm -rf /var/lib/mysql
   - sudo rm -rf /etc/mysql
+  - sudo rm -rf /etc/init.d/mysql
 
   # Install ruby dependencies to run serverspec tests
   - bundle install
