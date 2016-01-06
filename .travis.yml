@@ -53,6 +53,9 @@ script:
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
 
+  # Start service in case it not started
+  - sudo /etc/init.d/mysql start
+
   # Run serverspec tests
   - bundle exec rake
 
