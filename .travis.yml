@@ -23,14 +23,11 @@ before_install:
 
 install:
   # Remove existing mysql package and data
-  - sudo ps aux
-  - sudo netstat -anp
   - sudo ls -lhr /etc/mysql
   - sudo apt-get remove mysql-common mysql-server-5.5 mysql-server-core-5.5 mysql-client-5.5 mysql-client-core-5.5 -y
   - sudo apt-get autoremove -y
   - sudo rm -rf /var/lib/mysql
   - sudo rm -rf /etc/mysql
-  - sudo service --status-all
 
   # Install ruby dependencies to run serverspec tests
   - bundle install
@@ -57,5 +54,8 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
 
   # Run serverspec tests
+  - sudo ls -lhr /etc/mysql
+  - sudo cat /etc/mysql/my.cnf
+  - sudo mysqld --verbose --help 2>/dev/null
   - bundle exec rake spec
 
