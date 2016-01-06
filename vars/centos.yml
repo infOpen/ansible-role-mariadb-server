@@ -1,0 +1,39 @@
+---
+
+# Ubuntu vars
+
+#==============================================================================
+# OS PREFIXES
+#==============================================================================
+mariadbserver_os_prefixes:
+  data: /var/lib
+  log: /var/log
+  run: /var/run
+  shared: /usr/share
+  tmp: /tmp
+
+#==============================================================================
+# ROLE SETTINGS
+#==============================================================================
+mariadbserver_repository_entry: |
+  [mariadb]
+  name = MariaDB
+  baseurl = http://yum.mariadb.org/{{ mariadbserver_version }}/centos{{ ansible_distribution_major_version }}-amd64
+  gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+  gpgcheck=1
+
+mariadbserver_repository_directory: /etc/yum.repos.d
+mariadbserver_repository_file_name: mariadb.repo
+mariadbserver_repository_file_mode: "0644"
+mariadbserver_repository_file_owner: root
+mariadbserver_repository_file_group: root
+
+mariadbserver_packages:
+  - MariaDB-server
+  - MariaDB-client
+  - MySQL-python
+
+mariadbserver_service_name: mysql
+
+mariadbserver_config_file_location: "/etc/my.cnf"
+

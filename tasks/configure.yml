@@ -19,6 +19,16 @@
     mode: "{{ mariadbserver_binary_log_dir_mode }}"
 
 
+- name: create logs directory
+  become: True
+  file:
+    path: "{{ mariadbserver_general_log_file | dirname }}"
+    group: "{{ mariadbserver_binary_log_dir_group }}"
+    owner: "{{ mariadbserver_binary_log_dir_owner }}"
+    state: directory
+    mode: "{{ mariadbserver_binary_log_dir_mode }}"
+
+
 - name: stop mariadb if datadir move is needed
   become: True
   service:
