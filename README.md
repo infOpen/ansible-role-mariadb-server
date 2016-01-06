@@ -46,6 +46,7 @@ This role contains two tests methods :
     #==============================================================================
     # Package variables
     #------------------
+    mariadbserver_architecture: amd64
     mariadbserver_package_state: present
     mariadbserver_version: '5.5'
     
@@ -69,6 +70,10 @@ This role contains two tests methods :
     mariadbserver_logrotate_file_owner: root
     mariadbserver_logrotate_file_group: root
     mariadbserver_logrotate_file_mode: "0600"
+
+    mariadbserver_log_dir_owner: "{{ mariadbserver_owner }}"
+    mariadbserver_log_dir_group: "{{ mariadbserver_group }}"
+    mariadbserver_log_dir_mode: "0750"
     
     mariadbserver_binary_log_dir_owner: "{{ mariadbserver_owner }}"
     mariadbserver_binary_log_dir_group: "{{ mariadbserver_group }}"
