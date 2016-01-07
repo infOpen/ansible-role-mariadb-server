@@ -5,6 +5,23 @@
 VAGRANTFILE_API_VERSION = "2"
 
 VMS = {
+  :centos65_55 => {
+    :box => "nrel/CentOS-6.5-x86_64",
+    :mariadb_version => "5.5"
+
+  },
+  :centos65_100 => {
+    :box => "nrel/CentOS-6.5-x86_64",
+    :mariadb_version => "10.0"
+  },
+  :centos70_55 => {
+    :box => "geerlingguy/centos7",
+    :mariadb_version => "5.5"
+  },
+  :centos70_100 => {
+    :box => "geerlingguy/centos7",
+    :mariadb_version => "10.0"
+  },
   :trusty55 => {
     :box => "ubuntu/trusty64",
     :mariadb_version => "5.5"
